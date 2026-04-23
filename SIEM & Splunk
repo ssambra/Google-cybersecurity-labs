@@ -1,0 +1,62 @@
+Full Sample Report (Google Cybersecurity Lab Example)
+Title: Google Cybersecurity Lab — Course 5 (SIEM/Splunk)
+Analyst: Melissa Wozney — Identity Auditor & Threat Sentinel
+Date: April 2026
+Executive Summary
+This lab demonstrates SIEM workflows using Splunk to detect suspicious login activity. The exercise highlights log ingestion, query building, and dashboard creation for incident triage.
+
+Objectives
+Configure Splunk to ingest sample logs.
+
+Build queries to detect failed login attempts.
+
+Create dashboards for SOC monitoring.
+
+Document findings and remediation steps.
+
+Methodology
+Installed Splunk in lab environment.
+
+Loaded sample authentication logs.
+
+Built SPL queries to detect anomalies.
+
+Created dashboards for visualization.
+
+Documented findings in structured format.
+
+Findings
+Multiple failed login attempts from IP 192.168.1.45.
+
+Attempts occurred outside normal business hours.
+
+Account targeted: admin.
+
+Indicators suggest brute‑force attempt.
+
+Tools Used
+Splunk Enterprise
+
+SPL queries
+
+Linux terminal
+
+Indicators of Compromise
+Source IP: 192.168.1.45
+
+Target account: admin
+
+Time window: 02:00–03:00 UTC
+
+Screenshots
+(Placeholder: add Splunk dashboard screenshots here)
+
+Analyst Notes
+This lab demonstrates SOC workflows for brute‑force detection. Queries and dashboards can be adapted for enterprise environments.
+
+Appendix
+Sample SPL Query:
+
+Code
+index=auth_logs sourcetype=linux_secure "Failed password" 
+| stats count by src_ip, user

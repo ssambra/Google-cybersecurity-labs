@@ -60,3 +60,49 @@ Sample SPL Query:
 Code
 index=auth_logs sourcetype=linux_secure "Failed password" 
 | stats count by src_ip, user
+
+# Google Cybersecurity Lab — Course 5: SIEM/Splunk
+
+**Analyst:** Melissa Wozney — Identity Auditor & Threat Sentinel  
+**Date:** April 2026  
+**Lab Type:** SIEM/SOC Workflow — Splunk
+
+---
+
+## 1. Executive summary
+
+This lab demonstrates how to use Splunk as a Security Information and Event Management (SIEM) platform to detect suspicious authentication activity, triage alerts, and document findings. I ingested Linux authentication logs, built SPL queries to identify brute‑force behavior, and created dashboards to support SOC monitoring and incident response.
+
+---
+
+## 2. Objectives
+
+- Configure Splunk to ingest sample authentication logs.
+- Build SPL queries to detect failed login attempts and anomalies.
+- Create dashboards for SOC analysts to monitor authentication events.
+- Document indicators of compromise (IOCs) and recommended response actions.
+
+---
+
+## 3. Environment and tools
+
+- **Platform:** Splunk Enterprise (lab instance)
+- **Data source:** Linux `/var/log/auth.log` sample dataset
+- **Host OS:** Linux (lab VM)
+- **Other tools:**  
+  - Bash shell for log inspection  
+  - Text editor for quick parsing  
+
+---
+
+## 4. Data ingestion
+
+### 4.1 Log sample
+
+Example of raw log lines used in the lab:
+
+```text
+Apr 21 02:13:45 lab-host sshd[1245]: Failed password for invalid user admin from 192.168.1.45 port 53422 ssh2
+Apr 21 02:13:48 lab-host sshd[1247]: Failed password for invalid user admin from 192.168.1.45 port 53423 ssh2
+Apr 21 02:14:02 lab-host sshd[1250]: Accepted password for melissa from 10.0.0.15 port 50210 ssh2
+

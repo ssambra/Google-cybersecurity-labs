@@ -1,0 +1,62 @@
+# Splunk Dashboards — SOC Monitoring
+
+**Analyst:** Melissa Wozney  
+
+---
+
+## 1. Overview
+
+This folder contains Splunk dashboards designed to support SOC monitoring for authentication events, endpoint alerts, and network anomalies.
+
+---
+
+## 2. Dashboards
+
+### 2.1 Authentication overview
+
+- **Purpose:** Monitor failed and successful logins.
+- **Key metrics:** Failed logins by IP, user, and time.
+
+Example SPL:
+
+```spl
+index=auth_logs sourcetype=linux_secure
+| eval status=if(searchmatch("Failed password"), "FAILED", "OTHER")
+| stats count BY status, user
+2.2 Endpoint alerts
+Purpose: Visualize endpoint security alerts by severity and host.
+
+Example SPL:
+index=endpoint_alerts
+| stats count BY host, severity
+| sort - severity
+2.3 Network anomalies
+Purpose: Highlight unusual outbound connections.
+
+Example SPL:index=netflow
+| stats count BY src_ip, dest_ip, dest_port
+| where count > 100
+3. Screenshot descriptions
+Screenshot 1 — “Authentication overview dashboard”  
+Splunk dashboard with panels for failed logins by IP, user, and time.
+
+Screenshot 2 — “Endpoint alerts dashboard”  
+Bar chart showing alerts by severity and host.
+
+Screenshot 3 — “Network anomalies dashboard”  
+Table or chart listing high‑volume connections.
+Lessons learned
+Dashboards provide at‑a‑glance visibility for SOC analysts.
+
+Good visual design helps prioritize investigations.
+
+SPL flexibility allows rapid iteration on use cases.
+
+5. Folder contents
+README.md
+
+auth_overview_dashboard.png
+
+endpoint_alerts_dashboard.png
+
+network_anomalies_dashboard.png
